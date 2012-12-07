@@ -30,6 +30,9 @@ class Widget_Data {
 	var $submenu_import;
 
 	function __construct() {
+		if ( ! is_admin() )
+			return;
+
 		add_action('admin_menu', array($this, 'add_admin_menus'));
 		add_action('admin_enqueue_scripts', array($this, 'add_admin_scripts'));
 		add_action('load-tools_page_widget-settings-export', array($this, 'export_widget_settings'));
