@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class Widget_Data {
 
 	var $import_filename;
-	
+
 	function __construct() {
 		add_action('admin_menu', array($this, 'add_admin_menus'));
 		add_action('admin_enqueue_scripts', array($this, 'add_admin_scripts'));
@@ -33,7 +33,7 @@ class Widget_Data {
 		add_action('wp_ajax_widget_import_submit', array($this, 'widget_import_submit'));
 		add_filter('upload_mimes', array($this, 'json_upload_mimes'));
 	}
-	
+
 	function add_admin_scripts ($hook) {
 		if('tools_page_widget-settings-import' != $hook || 'tools_page_widget-settings-export' != $hook) {
 			wp_register_style('widget_data_css', plugins_url('/widget_data.css' , __FILE__));
@@ -119,13 +119,13 @@ class Widget_Data {
 		</div> <!-- end export-widget-settings -->
 		<?php
 	}
-	
+
 	function import_settings_page() {
 		?>
 		<div class="widget-data import-widget-settings">
 			<div class="wrap">
 				<h2>Widget Setting Import</h2>
-				
+
 					<?php if (isset($_FILES['upload-file'])) : ?>
 					<div id="notifier"></div>
 					<div class="import-wrapper">
@@ -218,7 +218,7 @@ class Widget_Data {
 		</div> <!-- end import-widget-settings -->
 		<?php
 	}
-	
+
 function parse_export_data($posted_array){
 		$sidebars_array = get_option('sidebars_widgets');
 		$sidebar_export = array();
@@ -228,7 +228,7 @@ function parse_export_data($posted_array){
 					if(in_array($sidebar_widget, array_keys($posted_array))) {
 						$sidebar_export[$sidebar][] = $sidebar_widget;
 					}
-				}			
+				}
 			}
 		}
 		$widgets = array();
@@ -254,7 +254,7 @@ function parse_export_data($posted_array){
 		$json = json_encode($export_array);
 		return $json;
 	}
-	
+
 	function parse_import_data($import_array){
 		$sidebars_data = $import_array[0];
 		$widget_data = $import_array[1];
@@ -319,7 +319,7 @@ function parse_export_data($posted_array){
 			return true;
 		} else { return false; }
 	}
-	
+
 	function export_widget_settings() {
 		if($_POST) {
 			header("Content-Description: File Transfer");
@@ -329,7 +329,7 @@ function parse_export_data($posted_array){
 			exit();
 		}
 	}
-	
+
 	function widget_import_submit() {
 		$widgets = $_POST['widgets'];
 		$json_data = file_get_contents($_POST['import_file']);
@@ -350,13 +350,13 @@ function parse_export_data($posted_array){
 			}
 			$sidebar_data[$title] = array_values($sidebar_data[$title]);
 		}
-		
+
 		foreach($widgets as $widget_title=>$widget_value){
 			foreach($widget_value as $k=>$v){
 				$widgets[$widget_title][$k] = $widget_data[$widget_title][$k];
 			}
 		}
-		
+
 		$sidebar_data = array_filter($sidebar_data);
 		$new_array = array($sidebar_data, $widgets);
 		if($this->parse_import_data($new_array)){
@@ -364,10 +364,10 @@ function parse_export_data($posted_array){
 		} else {
 			echo "ERROR";
 		}
-		
+
 		die(); // this is required to return a proper result
 	}
-	
+
 	function get_widget_settings_json() {
 		$widget_settings = $this->upload_widget_settings_file();
 		$file_contents = file_get_contents($widget_settings['file']);
@@ -427,7 +427,7 @@ function parse_export_data($posted_array){
 
 		return false;
 	}
-	
+
 	function get_widget_info($widget){
 		global $wp_registered_widgets;
 		if(isset($wp_registered_widgets[$widget])){
@@ -449,7 +449,7 @@ function parse_export_data($posted_array){
 
 		return $sidebar_widgets;
 	}
-	
+
 	function json_upload_mimes ( $existing_mimes=array() ) {
 		$existing_mimes['json'] = 'application/json';
 		return $existing_mimes;
