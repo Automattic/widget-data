@@ -99,8 +99,8 @@ class Widget_Data {
 
 										?>
 										<div class="import-form-row">
-											<input class="<?php echo ($sidebar_name == 'wp_inactive_widgets') ? 'inactive' : 'active'; ?>" type="checkbox" name="<?php echo $widget; ?>" id="meta_<?php echo $widget; ?>" />
-											<label for="meta_<?php echo $widget; ?>">&nbsp;
+											<input class="<?php echo ($sidebar_name == 'wp_inactive_widgets') ? 'inactive' : 'active'; ?>" type="checkbox" name="<?php echo esc_attr( $widget ); ?>" id="meta_<?php echo esc_attr( $widget ); ?>" />
+											<label for="meta_<?php echo esc_attr( $widget ); ?>">&nbsp;
 												<?php
 												echo ucfirst($widget_type);
 
@@ -165,7 +165,7 @@ class Widget_Data {
 
 									<?php if ($sidebar_info) : ?>
 										<div class="sidebar">
-											<h4><?php echo $sidebar_info['name']; ?></h4>
+											<h4><?php echo esc_html( $sidebar_info['name'] ); ?></h4>
 
 											<div class="widgets">
 												<?php foreach ($widget_list as $widget) :
@@ -181,15 +181,15 @@ class Widget_Data {
 													endif;
 													?>
 												<div class="import-form-row">
-														<input class="<?php echo ($sidebar_name == 'wp_inactive_widgets') ? 'inactive' : 'active'; ?>" type="checkbox" name="widgets[<?php echo $widget_type; ?>][<?php echo $widget_type_index; ?>]" id="meta_<?php echo $widget; ?>" />
+														<input class="<?php echo ($sidebar_name == 'wp_inactive_widgets') ? 'inactive' : 'active'; ?>" type="checkbox" name="widgets[<?php echo esc_attr( $widget_type ); ?>][<?php echo esc_attr( $widget_type_index ); ?>]" id="meta_<?php echo $widget; ?>" />
 														<label for="meta_<?php echo $widget; ?>">&nbsp;
 															<?php
-															echo ucfirst($widget_type);
+															echo esc_html( ucfirst( $widget_type ) )
 
 															if (!empty($widget_title)) :
-																echo (' - '.$widget_title);
+																echo esc_html( ' - '.$widget_title );
 															else :
-																echo (' - '.$widget_type_index);
+																echo esc_html( ' - '.$widget_type_index );
 															endif;
 															?>
 														</label>
@@ -200,7 +200,7 @@ class Widget_Data {
 									<?php endif; ?>
 								<?php endforeach; ?>
 							<?php endif; ?>
-							<input type="hidden" name="import_file" value="<?php echo $json_file; ?>"/>
+							<input type="hidden" name="import_file" value="<?php echo esc_attr( $json_file ); ?>"/>
 							<input type="hidden" name="action" value="widget_import_submit"/>
 						</div> <!-- end sidebars -->
 						<div class="right">
