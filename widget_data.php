@@ -41,11 +41,10 @@ class Widget_Data {
 		if ( ! in_array( $hook, array( $this->submenu_export, $this->submenu_import ) ) )
 			return;
 
-		wp_register_style('widget_data_css', plugins_url('/widget_data.css' , __FILE__));
-		wp_enqueue_style('widget_data_css');
+		wp_enqueue_style('widget_data_css', plugins_url('/widget_data.css' , __FILE__) );
 
-		wp_register_script( 'widget_data', plugins_url('/widget_data.js', __FILE__));
-		wp_enqueue_script('widget_data');
+		wp_enqueue_script( 'widget_data', plugins_url('/widget_data.js', __FILE__) );
+
 		$widgets_url = get_admin_url(false, 'widgets.php');
 		wp_localize_script('widget_data', 'widgets_url', $widgets_url);
 	}
