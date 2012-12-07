@@ -26,6 +26,9 @@ class Widget_Data {
 
 	var $import_filename;
 
+	var $submenu_export;
+	var $submenu_import;
+
 	function __construct() {
 		add_action('admin_menu', array($this, 'add_admin_menus'));
 		add_action('admin_enqueue_scripts', array($this, 'add_admin_scripts'));
@@ -35,15 +38,16 @@ class Widget_Data {
 	}
 
 	function add_admin_scripts ($hook) {
-		if('tools_page_widget-settings-import' != $hook || 'tools_page_widget-settings-export' != $hook) {
-			wp_register_style('widget_data_css', plugins_url('/widget_data.css' , __FILE__));
-			wp_enqueue_style('widget_data_css');
+		if ( ! in_array( $hook, array( $this->submenu_export, $this->submenu_import ) ) )
+			return;
 
-			wp_register_script( 'widget_data', plugins_url('/widget_data.js', __FILE__));
-			wp_enqueue_script('widget_data');
-			$widgets_url = get_admin_url(false, 'widgets.php');
-			wp_localize_script('widget_data', 'widgets_url', $widgets_url);
-		}
+		wp_register_style('widget_data_css', plugins_url('/widget_data.css' , __FILE__));
+		wp_enqueue_style('widget_data_css');
+
+		wp_register_script( 'widget_data', plugins_url('/widget_data.js', __FILE__));
+		wp_enqueue_script('widget_data');
+		$widgets_url = get_admin_url(false, 'widgets.php');
+		wp_localize_script('widget_data', 'widgets_url', $widgets_url);
 	}
 
 	 function add_admin_menus() {
