@@ -51,9 +51,9 @@ class Widget_Data {
 
 	 function add_admin_menus() {
 		// export
-		$this->submenu_export = add_management_page('Widget Settings Export', 'Widget Settings Export', 'administrator', 'widget-settings-export',  array(&$this, 'export_settings_page'));
+		$this->submenu_export = add_management_page('Widget Settings Export', 'Widget Settings Export', 'manage_options', 'widget-settings-export',  array(&$this, 'export_settings_page'));
 		//import
-		$this->submenu_import = add_management_page('Widget Settings Import', 'Widget Settings Import', 'administrator', 'widget-settings-import',  array(&$this, 'import_settings_page'));
+		$this->submenu_import = add_management_page('Widget Settings Import', 'Widget Settings Import', 'manage_options', 'widget-settings-import',  array(&$this, 'import_settings_page'));
 	}
 
 	function export_settings_page() {
