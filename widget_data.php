@@ -184,7 +184,7 @@ class Widget_Data {
 														<input class="<?php echo ($sidebar_name == 'wp_inactive_widgets') ? 'inactive' : 'active'; ?>" type="checkbox" name="widgets[<?php echo esc_attr( $widget_type ); ?>][<?php echo esc_attr( $widget_type_index ); ?>]" id="meta_<?php echo $widget; ?>" />
 														<label for="meta_<?php echo $widget; ?>">&nbsp;
 															<?php
-															echo esc_html( ucfirst( $widget_type ) )
+															echo esc_html( ucfirst( $widget_type ) );
 
 															if (!empty($widget_title)) :
 																echo esc_html( ' - '.$widget_title );
