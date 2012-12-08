@@ -208,7 +208,7 @@ class Widget_Data {
 						</div>
 						</form>
 					</div>
-					<?php else : ?>
+					<?php else : // $_FILES check ?>
 						<form action="" id="upload-widget-data" method="post" enctype="multipart/form-data">
 						<p>Select the file that contains widget settings</p>
 						<div id="output-text" style="float:left;"></div>
@@ -219,7 +219,7 @@ class Widget_Data {
 							<button type="submit" name="button-upload" id="button-upload" class="button">Show Widget Settings</button>
 						</div>
 						</form>
-					<?php endif; ?>
+					<?php endif; // $_FILES check ?>
 			</div> <!-- end wrap -->
 		</div> <!-- end import-widget-settings -->
 		<?php
