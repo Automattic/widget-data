@@ -212,7 +212,7 @@ class Widget_Data {
 						<form action="" id="upload-widget-data" method="post" enctype="multipart/form-data">
 						<p>Select the file that contains widget settings</p>
 						<div id="output-text" style="float:left;"></div>
-						<div id="upload-button" class="button-secondary" style="width:135px; float:left;">Click here to select a file</div>
+						<div id="upload-button" class="button-secondary" style="float:left;">Click here to select a file</div>
 						<input type="file" name="upload-file" id="upload-file" size="40" />
 						<div style="clear:both;"></div>
 						<div class="block">
