@@ -278,7 +278,7 @@ function parse_export_data($posted_array){
 					$new_widget_name = $this->get_new_widget_name($title, $index);
 					$new_index = trim(substr($new_widget_name, strrpos($new_widget_name, '-') + 1));
 
-					if(is_array($new_widgets[$title])) {
+					if( ! empty( $new_widgets[ $title ] ) && is_array( $new_widgets[ $title ] ) ) {
 						while(array_key_exists($new_index, $new_widgets[$title])) {
 							$new_index++;
 						}
