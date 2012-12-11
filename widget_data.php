@@ -37,7 +37,6 @@ class Widget_Data {
 		add_action('admin_enqueue_scripts', array($this, 'add_admin_scripts'));
 		add_action('load-tools_page_widget-settings-export', array($this, 'export_widget_settings'));
 		add_action('wp_ajax_widget_import_submit', array($this, 'widget_import_submit'));
-		add_filter('upload_mimes', array($this, 'json_upload_mimes'));
 	}
 
 	function add_admin_scripts ($hook) {
@@ -401,7 +400,9 @@ function parse_export_data($posted_array){
 	function upload_widget_settings_file() {
 		if (isset($_FILES['upload-file'])) {
 			$overrides = array('test_form' => false);
+			add_filter('upload_mimes', array($this, 'json_upload_mimes'));
 			$upload = wp_handle_upload($_FILES['upload-file'],$overrides);
+			remove_filter('upload_mimes', array($this, 'json_upload_mimes'));
 
 			return $upload;
 		}
