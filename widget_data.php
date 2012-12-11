@@ -143,11 +143,22 @@ class Widget_Data {
 					<form action="" id="import-widget-data" method="post">
 						<?php
 						$json = $this->get_widget_settings_json();
+
+						// This needs better error handling
+						if ( is_wp_error( $json ) )
+							wp_die( $json->get_error_message() );
+
+						// This needs better error handling
+						if ( ! $json )
+							wp_die( 'Unable to load import file.' );
+
 						$json_data = json_decode($json[0], true);
 						$json_file = $json[1];
 
+						// This needs better error handling
 						if (!$json_data)
-							return;
+							wp_die( 'Unable to parse import file.' );
+
 						?>
 						<div class="title">
 							<p class="widget-selection-error">Please select a widget to continue.</p>
@@ -376,6 +387,13 @@ function parse_export_data($posted_array){
 
 	function get_widget_settings_json() {
 		$widget_settings = $this->upload_widget_settings_file();
+
+		if ( is_wp_error( $widget_settings ) || ! $widget_settings )
+			return false;
+
+		if ( isset( $widget_settings['error'] ) )
+			return new WP_Error( 'widget_import_upload_error', $widget_settings['error'] );
+
 		$file_contents = file_get_contents($widget_settings['file']);
 		return array($file_contents, $widget_settings['file']);
 	}
